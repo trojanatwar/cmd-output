@@ -1,0 +1,22 @@
+import flask
+import subprocess
+import time        
+
+app = flask.Flask(__name__)
+
+@app.route('/yield')
+def index():
+    def inner():
+        proc = subprocess.Popen(
+            ['ipconfig'],            # CMD DOS COMMAND for IP CONFIGURATION 
+            shell=True,
+            stdout=subprocess.PIPE
+        )
+
+        for line in iter(proc.stdout.readline,''):
+            time.sleep(1)                      
+            yield line.rstrip() + '<br/>\n'.encode('ascii')
+
+    return flask.Response(inner(), mimetype='text/html') 
+
+app.run(debug=True, port=5000, host='0.0.0.0')
