@@ -22,12 +22,10 @@ class cmd_output(Resource):
         proc = subprocess.Popen(
                 command,            # CMD DOS COMMAND for IP CONFIGURATION 
                 shell=True,
-                stdout=subprocess.PIPE
-            )
+                stdout=subprocess.PIPE )
    
         for line in proc.stdout.readlines():
             respo.append(line.rstrip().decode("utf-8"))
-            # yield line.rstrip().decode("utf-8")
 
         return {'respo': respo}
 
@@ -41,8 +39,3 @@ api.add_resource(cmd_output, '/cmd_output/<command>')
 #     global command
 #     command = request.get_data().decode('utf-8')
 #     return render_template("display.html")
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
