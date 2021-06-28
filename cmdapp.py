@@ -9,14 +9,15 @@ from flask_restful import Resource, Api
 
 app = flask.Flask(__name__)
 api = Api(app)
-global command
+
+# global command   
 
 
 
 
 class cmd_output(Resource):
 
-    def get(self):
+    def get(self, command):
         respo = []
         proc = subprocess.Popen(
                 command,            # CMD DOS COMMAND for IP CONFIGURATION 
@@ -30,20 +31,16 @@ class cmd_output(Resource):
 
         return {'respo': respo}
 
-class StreamArray(list):
-    def __iter__(self):
-        obj = cmd_output()
-        return obj.get()
+api.add_resource(cmd_output, '/cmd_output/<command>')
 
 
-api.add_resource(cmd_output, '/cmd_output')
+# Future UI
 
-
-@app.route("/", methods=['GET', 'POST'])
-def home():
-    global command
-    command = request.get_data().decode('utf-8')
-    return render_template("display.html")
+# @app.route("/", methods=['GET', 'POST'])
+# def home():
+#     global command
+#     command = request.get_data().decode('utf-8')
+#     return render_template("display.html")
 
 
 
