@@ -34,8 +34,8 @@ api.add_resource(cmd_output, '/cmd_output/<command>')
 
 # Future UI
 
-# @app.route("/", methods=['GET', 'POST'])
-# def home():
-#     global command
-#     command = request.get_data().decode('utf-8')
-#     return render_template("display.html")
+@app.route("/", methods=['GET', 'POST'])
+def home():
+    global command
+    command = request.get_data().decode('utf-8')
+    return render_template("display.html")
