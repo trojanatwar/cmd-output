@@ -1,17 +1,12 @@
 import flask
 from flask import jsonify, render_template, request
 import json
-import subprocess 
-import time     
-from io import BufferedReader   
+import subprocess    
 from flask_restful import Resource, Api
 
 
 app = flask.Flask(__name__)
 api = Api(app)
-global command
-
-
 
 
 class cmd_output(Resource):
