@@ -11,7 +11,7 @@ api = Api(app)
 
 class cmd_output(Resource):
 
-    def get(self):
+    def get(self, command):
         respo = []
         proc = subprocess.Popen(
                 command,            # CMD DOS COMMAND for IP CONFIGURATION 
@@ -31,7 +31,7 @@ class StreamArray(list):
         return obj.get()
 
 
-api.add_resource(cmd_output, '/cmd_output')
+api.add_resource(cmd_output, '/cmd_output/<command>')
 
 
 @app.route("/", methods=['GET', 'POST'])
